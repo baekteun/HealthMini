@@ -8,8 +8,19 @@
 
 import UIKit
 
-class baseVC: UIViewController{
+class baseVC<T>: UIViewController{
     let bound = UIScreen.main.bounds
+    
+    let viewModel: T
+    
+    init(viewModel: T){
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     @available(*, unavailable)
     override func viewDidLoad() {
@@ -17,7 +28,12 @@ class baseVC: UIViewController{
         view.backgroundColor = .white
         addView()
         setLayout()
-        configureUI()
+        configureVC()
+        bindVM()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
     }
     
     deinit{
@@ -26,6 +42,6 @@ class baseVC: UIViewController{
     
     func addView(){}
     func setLayout(){}
-    func configureUI(){}
-    
+    func configureVC(){}
+    func bindVM(){}
 }

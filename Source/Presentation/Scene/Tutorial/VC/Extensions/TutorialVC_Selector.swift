@@ -6,4 +6,10 @@
 //  Copyright © 2022 baegteun. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+extension TutorialVC{
+    @objc func sliderValueDidChange(_ sender: UISlider) {
+        viewModel.setKcal(Int(sender.value))
+    }
+}

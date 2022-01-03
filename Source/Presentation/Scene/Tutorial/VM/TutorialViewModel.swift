@@ -6,4 +6,12 @@
 //  Copyright © 2022 baegteun. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+final class TutorialViewModel{
+    var kcal = Observable(2000)
+    
+    func setKcal(_ kcal: Int){
+        self.kcal.value = kcal
+    }
+}
