@@ -33,6 +33,10 @@ class baseCoordinator: Coordinator {
         }
     }
     
+    func navigate(to: HealthStep){
+        
+    }
+    
     func removeChildCoordinators() {
         childCoordinators.forEach{ $0.removeChildCoordinators() }
         childCoordinators.removeAll()
