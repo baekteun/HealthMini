@@ -9,6 +9,6 @@
 import Foundation
 
 protocol StartDayRepository{
-    func setFirstDay()
+    func setFirstDay(date: Date)
     func getFirstDay() -> Date
 }
