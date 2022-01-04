@@ -20,4 +20,8 @@ final class MainVM: baseViewModel{
     func setDatasource(data: [HealthKind]) {
         self.dataSource.value = data
     }
+    
+    func setGoalCount() {
+        
+    }
 }

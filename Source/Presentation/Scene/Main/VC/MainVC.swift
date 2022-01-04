@@ -25,12 +25,24 @@ final class MainVC: baseVC<MainVM>{
     private let collectionView: UICollectionView = {
        let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 5
+        layout.minimumLineSpacing = 14
          
         let collection = UICollectionView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width*0.35, height: UIScreen.main.bounds.width*0.35), collectionViewLayout: layout)
+        collection.showsHorizontalScrollIndicator = false
         collection.register(HealthKindCell.self, forCellWithReuseIdentifier: HealthKindCell.reusableID)
-        collection.contentInset = .init(top: 5, left: 5, bottom: 5, right: 5)
+        collection.contentInset = .init(top: 0, left: 5, bottom: 0, right: 5)
         return collection
+    }()
+    
+    private let goalCountLabel: UILabel = {
+       let lb = UILabel()
+        lb.font = UIFont(font: HealthMiniFontFamily.Roboto.bold, size: 12)
+        lb.layer.borderWidth = 1
+        lb.layer.borderColor = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1).cgColor
+        lb.textAlignment = .center
+        lb.numberOfLines = 0
+        lb.layer.cornerRadius = 20
+        return lb
     }()
     
     // MARK: - Lifecycle
@@ -44,7 +56,7 @@ final class MainVC: baseVC<MainVM>{
         setDelegate()
     }
     override func addView() {
-        view.addSubViews(chart, collectionView)
+        view.addSubViews(chart, collectionView, goalCountLabel)
     }
     override func setLayout() {
         NSLayoutConstraint.activate([
@@ -53,11 +65,15 @@ final class MainVC: baseVC<MainVM>{
             chart.widthAnchor.constraint(equalToConstant: bound.width*0.8933),
             chart.heightAnchor.constraint(equalToConstant: bound.width*0.8933 - 10),
             
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             collectionView.topAnchor.constraint(equalTo: chart.bottomAnchor, constant: 35),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -bound.width*0.3743),
             
+            goalCountLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            goalCountLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            goalCountLabel.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: bound.height*0.0467),
+            goalCountLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -bound.height*0.0517)
         ])
     }
     override func configureVC() {
@@ -75,5 +91,6 @@ final class MainVC: baseVC<MainVM>{
         viewModel.dataSource.bind { [weak self] _ in
             self?.collectionView.reloadData()
         }
+        
     }
 }
