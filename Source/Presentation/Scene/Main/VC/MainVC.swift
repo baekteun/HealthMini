@@ -52,6 +52,7 @@ final class MainVC: baseVC<MainVM>{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.setDatasource(data: [.WALKING, .RECORD, .SLEEP])
+        viewModel.viewDidAppear()
     }
     
     // MARK: - UI
@@ -94,6 +95,8 @@ final class MainVC: baseVC<MainVM>{
         viewModel.dataSource.bind { [weak self] _ in
             self?.collectionView.reloadData()
         }
-        
+        viewModel.goalCount.bind { date, count in
+            self.goalCountLabel.text = "\(date.dateToString())~오늘까지\n목표 달성 총 \(count)회"
+        }
     }
 }

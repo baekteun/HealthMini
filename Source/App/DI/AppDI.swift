@@ -27,6 +27,10 @@ extension AppDI{
         return .init(repository: getDefaultStartDayRepository())
     }
     
+    func getDefaultGetStartDayUseCase() -> DefaultGetStartDayUseCase{
+        return .init(repository: getDefaultStartDayRepository())
+    }
+    
     func getDefaultGetKcalUseCase() -> DefaultGetKcalUseCase{
         return .init(repository: getDefaultKcalRepository())
     }
