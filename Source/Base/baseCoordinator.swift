@@ -33,7 +33,7 @@ class baseCoordinator: Coordinator {
         }
     }
     
-    func navigate(to: HealthStep){
+    func navigate(to step: HealthStep){
         
     }
     

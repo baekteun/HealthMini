@@ -28,12 +28,14 @@ final class AppCoordinator: baseCoordinator{
 private extension AppCoordinator{
     func initialVC() {
         removeChildCoordinators()
-        if UserDefaults.standard.integer(forKey: "goal") == 0{
+        if UserDefaults.standard.integer(forKey: "kcalGoal") == 0{
             let coordinator = TutorialCoordinator(navigationController: navigationController)
             start(coordinator: coordinator)
             window.rootViewController = coordinator.navigationController
         }else{
-            
+            let coordinator = MainCoordinator(navigationController: navigationController)
+            start(coordinator: coordinator)
+            window.rootViewController = coordinator.navigationController
         }
         
     }
