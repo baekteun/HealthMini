@@ -19,6 +19,11 @@ final class AppDI{
         let vm = MainVM(coordinator: coordinator)
         return MainVC(viewModel: vm)
     }
+    
+    func getWalkingVC(coordinator: baseCoordinator) -> WalkingVC{
+        let vm = WalkingVM(coordinator: coordinator)
+        return WalkingVC(viewModel: vm)
+    }
 }
 
 // MARK: - UseCase

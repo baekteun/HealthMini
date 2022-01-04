@@ -17,6 +17,10 @@ class baseCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
+    deinit {
+        print("\(type(of: self)): \(#function)")
+    }
+    
     func start() {
         fatalError("Start method should be implemented")
     }

@@ -19,9 +19,17 @@ final class MainCoordinator: baseCoordinator{
     // MARK: - Navigate
     override func navigate(to step: HealthStep) {
         switch step{
-            
+        case .walkingIsRequired:
+            navigateToWalking()
         default:
             return
         }
+    }
+}
+
+private extension MainCoordinator{
+    func navigateToWalking() {
+        let vc = AppDI.shared.getWalkingVC(coordinator: self)
+        self.navigationController.pushViewController(vc, animated: true)
     }
 }

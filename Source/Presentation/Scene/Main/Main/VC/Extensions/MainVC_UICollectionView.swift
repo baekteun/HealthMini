@@ -21,7 +21,9 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource{
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.cellDidSelect(index: indexPath)
+    }
 }
 
 extension MainVC: UICollectionViewDelegateFlowLayout{

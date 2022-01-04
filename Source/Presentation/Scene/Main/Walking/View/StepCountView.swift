@@ -34,16 +34,21 @@ final class StepCountView: UIView{
     }()
     
     // MARK: - Init
-    init(total: Int, average: Int){
+    init(){
         super.init(frame: .zero)
         addView()
         setLayout()
         configureView()
-        bind(total: total, average: average)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Method
+    func bind(total: Int, average: Int){
+        totalStepLabel.text = "총 \(total)걸음"
+        averageStepLabel.text = "평균 \(average)걸음"
     }
 }
 
@@ -61,9 +66,8 @@ private extension StepCountView{
     }
     func configureView(){
         self.backgroundColor = HealthMiniAsset.healthMainColor.color
+        self.layer.cornerRadius = 22
+        self.clipsToBounds = true
     }
-    func bind(total: Int, average: Int){
-        totalStepLabel.text = "총 \(total)걸음"
-        averageStepLabel.text = "평균 \(average)걸음"
-    }
+    
 }
