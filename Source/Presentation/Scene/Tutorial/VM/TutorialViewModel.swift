@@ -11,15 +11,15 @@ import RealmSwift
 
 final class TutorialViewModel: baseViewModel{
     // MARK: - Init
-    override init(coordinator: baseCoordinator) {
+    init(coordinator: baseCoordinator, setKcalUseCase: SetKcalUseCase){
+        self.setKcalUseCase = setKcalUseCase
         super.init(coordinator: coordinator)
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
     
     // MARK: - Properties
     var kcal = Observable(2000)
     
-    
+    private let setKcalUseCase: SetKcalUseCase
     
     // MARK: - Method
     func setKcal(_ kcal: Int){
@@ -27,7 +27,7 @@ final class TutorialViewModel: baseViewModel{
     }
     
     func setButtonDidTap(){
-        UserDefaults.standard.set(kcal.value , forKey: "kcalGoal")
+        setKcalUseCase.execute(kcal: kcal.value)
         self.coordinator.navigate(to: HealthStep.setGoalIsCompleted)
     }
 }

@@ -7,7 +7,7 @@
 //
 
 
-final class DefaultGetKcalUseCase: getKcalUseCase{
+final class DefaultGetKcalUseCase: GetKcalUseCase{
     let kcalRepository: KcalRepository
     
     init(repository: KcalRepository){

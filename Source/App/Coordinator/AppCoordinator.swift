@@ -12,9 +12,12 @@ final class AppCoordinator: baseCoordinator{
     // MARK: - Properties
     private let window: UIWindow
     
+    private let getKcalUseCase: GetKcalUseCase
+    
     // MARK: - Start
     init(windowScene: UIWindowScene, navigationController: UINavigationController){
         window = UIWindow(windowScene: windowScene)
+        self.getKcalUseCase = AppDI.shared.getDefaultGetUseCase()
         super.init(navigationController: navigationController)
     }
     override func start() {
@@ -28,7 +31,7 @@ final class AppCoordinator: baseCoordinator{
 private extension AppCoordinator{
     func initialVC() {
         removeChildCoordinators()
-        if UserDefaults.standard.integer(forKey: "kcalGoal") == 0{
+        if getKcalUseCase.execute() == 0{
             let coordinator = TutorialCoordinator(navigationController: navigationController)
             start(coordinator: coordinator)
             window.rootViewController = coordinator.navigationController

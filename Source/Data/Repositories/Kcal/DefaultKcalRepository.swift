@@ -20,7 +20,7 @@ final class DefaultKcalRepository: KcalRepository{
     }
     
     func getKcal() -> Int {
-        let kcal = realm.objects(Kcal.self).first ?? .init()
+        let kcal = realm.objects(Kcal.self).first ?? .init(kcal: 0)
         return kcal.kcal
     }
     

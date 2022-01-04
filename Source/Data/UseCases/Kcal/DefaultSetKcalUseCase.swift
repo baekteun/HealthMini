@@ -6,7 +6,7 @@
 //  Copyright © 2022 baegteun. All rights reserved.
 //
 
-final class DefaultSetKcalUseCase: setKcalUseCase{
+final class DefaultSetKcalUseCase: SetKcalUseCase{
     let kcalRepository: KcalRepository
     
     init(repository: KcalRepository){
