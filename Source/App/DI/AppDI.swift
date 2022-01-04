@@ -9,7 +9,12 @@
 final class AppDI{
     static let shared = AppDI()
     
-    func getDefaultGetUseCase() -> DefaultGetKcalUseCase{
+    func getDefaultSetStartDayUseCase() -> DefaultSetStartDayUseCase{
+        let repo = DefaultStartDayRepository()
+        return .init(repository: repo)
+    }
+    
+    func getDefaultGetKcalUseCase() -> DefaultGetKcalUseCase{
         let repo = DefaultKcalRepository()
         return .init(repository: repo)
     }

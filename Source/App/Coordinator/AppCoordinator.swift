@@ -17,7 +17,7 @@ final class AppCoordinator: baseCoordinator{
     // MARK: - Start
     init(windowScene: UIWindowScene, navigationController: UINavigationController){
         window = UIWindow(windowScene: windowScene)
-        self.getKcalUseCase = AppDI.shared.getDefaultGetUseCase()
+        self.getKcalUseCase = AppDI.shared.getDefaultGetKcalUseCase()
         super.init(navigationController: navigationController)
     }
     override func start() {
