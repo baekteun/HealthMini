@@ -14,10 +14,18 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HealthKindCell.reusableID, for: indexPath) as! HealthKindCell
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HealthKindCell.reusableID, for: indexPath) as? HealthKindCell else { return .init()}
         cell.model = viewModel.dataSource.value[indexPath.row].rawValue
+        cell.backgroundColor = .white
         return cell
     }
     
     
+}
+
+extension MainVC: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: bound.width*0.35, height: bound.width*0.35)
+    }
 }

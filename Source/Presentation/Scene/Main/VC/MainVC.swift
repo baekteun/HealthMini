@@ -24,11 +24,12 @@ final class MainVC: baseVC<MainVM>{
     
     private let collectionView: UICollectionView = {
        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
+        layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 5
          
         let collection = UICollectionView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width*0.35, height: UIScreen.main.bounds.width*0.35), collectionViewLayout: layout)
-        collection.contentInset = .init(top: 0, left: 5, bottom: 0, right: 5)
+        collection.register(HealthKindCell.self, forCellWithReuseIdentifier: HealthKindCell.reusableID)
+        collection.contentInset = .init(top: 5, left: 5, bottom: 5, right: 5)
         return collection
     }()
     
@@ -39,6 +40,9 @@ final class MainVC: baseVC<MainVM>{
     }
     
     // MARK: - UI
+    override func setUp() {
+        setDelegate()
+    }
     override func addView() {
         view.addSubViews(chart, collectionView)
     }
@@ -47,11 +51,13 @@ final class MainVC: baseVC<MainVM>{
             chart.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             chart.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             chart.widthAnchor.constraint(equalToConstant: bound.width*0.8933),
-            chart.heightAnchor.constraint(equalToConstant: bound.width*0.8933 - 20),
+            chart.heightAnchor.constraint(equalToConstant: bound.width*0.8933 - 10),
             
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: chart.bottomAnchor, constant: 35)
+            collectionView.topAnchor.constraint(equalTo: chart.bottomAnchor, constant: 35),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -bound.width*0.3743),
+            
         ])
     }
     override func configureVC() {

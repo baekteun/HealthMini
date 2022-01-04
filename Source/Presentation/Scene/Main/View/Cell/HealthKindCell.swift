@@ -29,7 +29,7 @@ final class HealthKindCell: BaseCollectionViewCell<String>{
     }
     override func configureCell() {
         self.layer.cornerRadius = 27
-        self.addShadow(radius: 10)
+        self.addShadow(color: .lightGray, radius: 2, offSet: .init(width: 0, height: 2), opacity: 1)
     }
     override func bind(_ model: String) {
         kindLabel.text = model
