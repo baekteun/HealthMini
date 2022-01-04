@@ -16,7 +16,7 @@ final class TutorialViewModel: baseViewModel{
     }
     
     func setButtonDidTap(){
-        UserDefaults.standard.set(kcal.value, forKey: "kcalGoal")
+        UserDefaults.standard.set(kcal.value , forKey: "kcalGoal")
         self.coordinator.navigate(to: HealthStep.setGoalIsCompleted)
     }
 }
