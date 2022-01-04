@@ -7,6 +7,6 @@
 //
 
 protocol KcalRepository{
-    func setKcal()
+    func setKcal(kcal: Int)
     func getKcal() -> Int
 }
