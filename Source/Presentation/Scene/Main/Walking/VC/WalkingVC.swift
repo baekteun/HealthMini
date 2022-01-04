@@ -27,7 +27,7 @@ final class WalkingVC: baseVC<WalkingVM>{
     // MARK: - UI
     override func addView() {
         view.addSubViews(stepCountView)
-    }g
+    }
     override func setLayout() {
         NSLayoutConstraint.activate([
             stepCountView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
