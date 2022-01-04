@@ -26,6 +26,7 @@ class baseVC<T: baseViewModel>: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        setUp()
         addView()
         setLayout()
         configureVC()
@@ -40,6 +41,7 @@ class baseVC<T: baseViewModel>: UIViewController{
         print("\(type(of: self)): \(#function)")
     }
     
+    func setUp(){}
     func addView(){}
     func setLayout(){}
     func configureVC(){}

@@ -18,4 +18,5 @@ extension ReusableID{
     }
 }
 
+extension UITableViewCell: ReusableID {}
 extension UICollectionViewCell: ReusableID {}

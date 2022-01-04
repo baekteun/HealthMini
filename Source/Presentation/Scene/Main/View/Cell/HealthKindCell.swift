@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ExerciseKindCell: BaseCollectionViewCell<String>{
+final class HealthKindCell: BaseCollectionViewCell<String>{
     // MARK: - Properties
     private let kindLabel: UILabel = {
        let lb = UILabel()
