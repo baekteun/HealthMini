@@ -13,7 +13,7 @@ enum HealthStep{
     
     // Goal
     case setGoalIsRequired
-    case goalIsCompleted
+    case setGoalIsCompleted
     
     // Main
     case mainIsRequired

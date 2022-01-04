@@ -16,6 +16,6 @@ final class TutorialViewModel: baseViewModel{
     }
     
     func setButtonDidTap(){
-        
+        self.coordinator.navigate(to: HealthStep.setGoalIsCompleted)
     }
 }
