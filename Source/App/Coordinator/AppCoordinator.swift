@@ -25,6 +25,17 @@ final class AppCoordinator: baseCoordinator{
         window.makeKeyAndVisible()
         
     }
+    
+    override func navigate(to step: HealthStep) {
+        switch step{
+        case .tutorialIsCompleted, .mainIsRequired:
+            coordinateToMain()
+        case .tutorialIsRequired:
+            coordinateToTutorial()
+        default:
+            return
+        }
+    }
 }
 
 // MARK: - Method
@@ -32,14 +43,23 @@ private extension AppCoordinator{
     func initialVC() {
         removeChildCoordinators()
         if getKcalUseCase.execute() == 0{
-            let coordinator = TutorialCoordinator(navigationController: navigationController)
-            start(coordinator: coordinator)
-            window.rootViewController = coordinator.navigationController
+            self.navigate(to: .tutorialIsRequired)
         }else{
-            let coordinator = MainCoordinator(navigationController: navigationController)
-            start(coordinator: coordinator)
-            window.rootViewController = coordinator.navigationController
+            self.navigate(to: .mainIsRequired)
         }
         
     }
+    func coordinateToTutorial() {
+        let coordinator = TutorialCoordinator(navigationController: navigationController)
+        start(coordinator: coordinator)
+        window.rootViewController = coordinator.navigationController
+    }
+    
+    func coordinateToMain() {
+        let coordinator = MainCoordinator(navigationController: navigationController)
+        start(coordinator: coordinator)
+        window.rootViewController = coordinator.navigationController
+    }
 }
+
+

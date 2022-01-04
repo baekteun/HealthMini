@@ -18,9 +18,8 @@ final class TutorialCoordinator: baseCoordinator{
     // MARK: - Navigate
     override func navigate(to step: HealthStep) {
         switch step{
-        case .setGoalIsCompleted:
-            self.parentCoordinator?.start()
-            return
+        case .tutorialIsCompleted:
+            self.parentCoordinator?.navigate(to: .tutorialIsCompleted)
         default:
             return
         }

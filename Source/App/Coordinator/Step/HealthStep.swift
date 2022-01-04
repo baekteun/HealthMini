@@ -12,8 +12,8 @@ enum HealthStep{
     case dismiss
     
     // Goal
-    case setGoalIsRequired
-    case setGoalIsCompleted
+    case tutorialIsRequired
+    case tutorialIsCompleted
     
     // Main
     case mainIsRequired

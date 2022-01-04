@@ -28,6 +28,6 @@ final class TutorialViewModel: baseViewModel{
     
     func setButtonDidTap(){
         setKcalUseCase.execute(kcal: kcal.value)
-        self.coordinator.navigate(to: HealthStep.setGoalIsCompleted)
+        self.coordinator.navigate(to: HealthStep.tutorialIsCompleted)
     }
 }

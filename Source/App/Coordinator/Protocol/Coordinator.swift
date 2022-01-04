@@ -15,5 +15,6 @@ protocol Coordinator: AnyObject {
     func start()
     func start(coordinator: Coordinator)
     func didFinish(coordinator: Coordinator)
+    func navigate(to step: HealthStep)
     func removeChildCoordinators()
 }
