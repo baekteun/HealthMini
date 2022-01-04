@@ -12,4 +12,8 @@ extension TutorialVC{
     @objc func sliderValueDidChange(_ sender: UISlider) {
         viewModel.setKcal(Int(sender.value))
     }
+    
+    @objc func setButtonDidTap(_ sender: UIButton) {
+        viewModel.setButtonDidTap()
+    }
 }

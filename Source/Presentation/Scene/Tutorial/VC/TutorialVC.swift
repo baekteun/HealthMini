@@ -31,6 +31,7 @@ final class TutorialVC: baseVC<TutorialViewModel>{
         btn.setTitleColor(.white, for: .normal)
         btn.layer.cornerRadius = 10
         btn.titleLabel?.font = UIFont(font: HealthMiniFontFamily.Roboto.bold, size: 12)
+        btn.addTarget(self, action: #selector(setButtonDidTap(_:)), for: .touchUpInside)
         return btn
     }()
     

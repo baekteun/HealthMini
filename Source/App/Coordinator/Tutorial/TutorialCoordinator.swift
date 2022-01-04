@@ -11,7 +11,7 @@ import UIKit
 final class TutorialCoordinator: baseCoordinator{
     // MARK: - Start
     override func start() {
-        let vc = TutorialVC(viewModel: .init())
+        let vc = TutorialVC(viewModel: TutorialViewModel(coordinator: self))
         self.navigationController.setViewControllers([vc], animated: true)
     }
     

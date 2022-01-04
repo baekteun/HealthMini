@@ -8,10 +8,14 @@
 
 import UIKit
 
-final class TutorialViewModel{
+final class TutorialViewModel: baseViewModel{
     var kcal = Observable(2000)
     
     func setKcal(_ kcal: Int){
         self.kcal.value = kcal
+    }
+    
+    func setButtonDidTap(){
+        
     }
 }

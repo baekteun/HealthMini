@@ -8,7 +8,7 @@
 
 import UIKit
 
-class baseVC<T>: UIViewController{
+class baseVC<T: baseViewModel>: UIViewController{
     let bound = UIScreen.main.bounds
     
     let viewModel: T
