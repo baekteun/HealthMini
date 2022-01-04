@@ -11,7 +11,7 @@ final class AppDI{
     
     func getDefaultSetStartDayUseCase() -> DefaultSetStartDayUseCase{
         let repo = DefaultStartDayRepository()
-        return .init(repository: repo)
+        return .init(repository: repo) 
     }
     
     func getDefaultGetKcalUseCase() -> DefaultGetKcalUseCase{
