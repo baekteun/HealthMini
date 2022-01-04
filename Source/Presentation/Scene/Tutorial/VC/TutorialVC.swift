@@ -6,7 +6,6 @@
 //  Copyright © 2022 baegteun. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 final class TutorialVC: baseVC<TutorialViewModel>{

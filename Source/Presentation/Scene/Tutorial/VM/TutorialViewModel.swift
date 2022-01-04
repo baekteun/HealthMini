@@ -7,10 +7,21 @@
 //
 
 import UIKit
+import RealmSwift
 
 final class TutorialViewModel: baseViewModel{
+    // MARK: - Init
+    override init(coordinator: baseCoordinator) {
+        super.init(coordinator: coordinator)
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+    }
+    
+    // MARK: - Properties
     var kcal = Observable(2000)
     
+    
+    
+    // MARK: - Method
     func setKcal(_ kcal: Int){
         self.kcal.value = kcal
     }

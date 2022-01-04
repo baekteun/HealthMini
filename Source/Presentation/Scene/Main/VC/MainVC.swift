@@ -7,9 +7,21 @@
 //
 
 import UIKit
+import RealmSwift
 
 final class MainVC: baseVC<baseViewModel>{
+    // MARK: - Properties
+    
+    
+    // MARK: - UI
+    override func addView() {
+        
+    }
+    override func setLayout() {
+        
+    }
     override func configureVC() {
         view.backgroundColor = .green
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
 }
