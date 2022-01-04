@@ -17,4 +17,7 @@ enum HealthStep{
     
     // Main
     case mainIsRequired
+    case walkingIsRequired
+    case recordIsRequired
+    case sleepIsRequired
 }
