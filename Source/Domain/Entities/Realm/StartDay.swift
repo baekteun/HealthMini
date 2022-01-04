@@ -8,11 +8,11 @@
 
 import RealmSwift
 
-final class FirstDay: Object{
-    @Persisted var firstDay: Date = Date()
+final class StartDay: Object{
+    @Persisted var startDay: Date = Date()
     
     convenience init(firstDay: Date) {
         self.init()
-        self.firstDay = firstDay
+        self.startDay = firstDay
     }
 }

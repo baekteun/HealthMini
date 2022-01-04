@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol FirstDayRepository{
+protocol StartDayRepository{
     func setFirstDay()
     func getFirstDay() -> Date
 }
