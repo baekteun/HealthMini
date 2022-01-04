@@ -21,5 +21,13 @@ extension UIView{
         subView.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         subView.forEach(addSubview(_:))
     }
+    
+    func addShadow(
+        color: UIColor = .black,
+        radius: CGFloat = 1
+    ){
+        self.layer.shadowColor = color.cgColor
+        self.layer.shadowRadius = radius
+    }
 }
 
