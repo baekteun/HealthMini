@@ -6,23 +6,43 @@
 //  Copyright © 2022 baegteun. All rights reserved.
 //
 
+// MARK: - VC
 final class AppDI{
     static let shared = AppDI()
     
+    func getTutorialVC(coordinator: baseCoordinator) -> TutorialVC{
+        let vm = TutorialViewModel(coordinator: coordinator)
+        return TutorialVC(viewModel: vm)
+    }
+    
+    func getMainVC(coordinator: baseCoordinator) -> MainVC{
+        let vm = MainVM(coordinator: coordinator)
+        return MainVC(viewModel: vm)
+    }
+}
+
+// MARK: - UseCase
+extension AppDI{
     func getDefaultSetStartDayUseCase() -> DefaultSetStartDayUseCase{
-        let repo = DefaultStartDayRepository()
-        return .init(repository: repo) 
+        return .init(repository: getDefaultStartDayRepository())
     }
     
     func getDefaultGetKcalUseCase() -> DefaultGetKcalUseCase{
-        let repo = DefaultKcalRepository()
-        return .init(repository: repo)
+        return .init(repository: getDefaultKcalRepository())
     }
     
-    func getTutorialVC(coordinator: baseCoordinator) -> TutorialVC{
-        let repo = DefaultKcalRepository()
-        let useCase = DefaultSetKcalUseCase(repository: repo)
-        let vm = TutorialViewModel(coordinator: coordinator, setKcalUseCase: useCase)
-        return TutorialVC(viewModel: vm)
+    func getDefaultSetKcalUseCase() -> DefaultSetKcalUseCase{
+        return .init(repository: getDefaultKcalRepository())
+    }
+}
+
+// MARK: - Repository
+extension AppDI{
+    func getDefaultStartDayRepository() -> DefaultStartDayRepository{
+        return .init()
+    }
+    
+    func getDefaultKcalRepository() -> DefaultKcalRepository{
+        return .init()
     }
 }

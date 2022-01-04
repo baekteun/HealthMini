@@ -45,6 +45,9 @@ final class MainVC: baseVC<MainVM>{
         return lb
     }()
     
+    // MARK: - Init
+    
+    
     // MARK: - Lifecycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

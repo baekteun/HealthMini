@@ -15,6 +15,13 @@ enum HealthKind: String{
 }
 
 final class MainVM: baseViewModel{
+    // MARK: - Init
+    override init(coordinator: baseCoordinator) {
+        super.init(coordinator: coordinator)
+        
+    }
+    
+    // MARK: - Properties
     var dataSource = Observable([HealthKind]())
     
     func setDatasource(data: [HealthKind]) {

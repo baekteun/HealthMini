@@ -10,16 +10,16 @@ import UIKit
 import RealmSwift
 
 final class TutorialViewModel: baseViewModel{
-    // MARK: - Init
-    init(coordinator: baseCoordinator, setKcalUseCase: SetKcalUseCase){
-        self.setKcalUseCase = setKcalUseCase
-        super.init(coordinator: coordinator)
-    }
-    
     // MARK: - Properties
     var kcal = Observable(2000)
     
     private let setKcalUseCase: SetKcalUseCase
+    
+    // MARK: - Init
+    override init(coordinator: baseCoordinator) {
+        self.setKcalUseCase = AppDI.shared.getDefaultSetKcalUseCase()
+        super.init(coordinator: coordinator)
+    }
     
     // MARK: - Method
     func setKcal(_ kcal: Int){
