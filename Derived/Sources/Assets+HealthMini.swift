@@ -19,6 +19,7 @@
 public enum HealthMiniAsset {
   public static let accentColor = HealthMiniColors(name: "AccentColor")
   public static let healthLogo = HealthMiniImages(name: "Health_Logo")
+  public static let healthMainColor = HealthMiniColors(name: "Health_MainColor")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
