@@ -7,10 +7,6 @@
 //
 
 enum HealthStep{
-    // Global
-    case alert(title: String?, message: String?)
-    case dismiss
-    
     // Goal
     case tutorialIsRequired
     case tutorialIsCompleted
