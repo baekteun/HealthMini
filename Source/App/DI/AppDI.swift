@@ -11,7 +11,7 @@ final class AppDI{
     static let shared = AppDI()
     
     func getTutorialVC(coordinator: baseCoordinator) -> TutorialVC{
-        let vm = TutorialViewModel(coordinator: coordinator)
+        let vm = TutorialVM(coordinator: coordinator)
         return TutorialVC(viewModel: vm)
     }
     

@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-final class TutorialViewModel: baseViewModel{
+final class TutorialVM: baseViewModel{
     // MARK: - Properties
     var kcal = Observable(2000)
     

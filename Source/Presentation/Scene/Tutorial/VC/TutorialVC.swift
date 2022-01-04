@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TutorialVC: baseVC<TutorialViewModel>{
+final class TutorialVC: baseVC<TutorialVM>{
     // MARK: - Properties
     private let slider: TutorialSliderView = {
        let slider = TutorialSliderView()
