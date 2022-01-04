@@ -7,7 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
 final class WalkingVC: baseVC<WalkingVM>{
-    
+    // MARK: - Properties
+    private let stepCountView: UIView = {
+        let v = UIView()
+        return v
+    }()
 }
