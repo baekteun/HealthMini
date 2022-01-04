@@ -13,6 +13,7 @@ final class AppCoordinator: baseCoordinator{
     private let window: UIWindow
     
     private let getKcalUseCase: GetKcalUseCase
+    private lazy var setStartDayUseCase: SetStartDayUseCase = AppDI.shared.getDefaultSetStartDayUseCase()
     
     // MARK: - Start
     init(windowScene: UIWindowScene, navigationController: UINavigationController){
@@ -50,6 +51,7 @@ private extension AppCoordinator{
         
     }
     func coordinateToTutorial() {
+        setStartDayUseCase.execute(date: Date())
         let coordinator = TutorialCoordinator(navigationController: navigationController)
         start(coordinator: coordinator)
         window.rootViewController = coordinator.navigationController
