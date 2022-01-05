@@ -13,6 +13,38 @@ final class DefaultHealthRepository: HealthRepository{
     private let realm = try! Realm()
     private let store = HKHealthStore()
     
+    func getTotalStep() async throws -> Int {
+        try await withCheckedThrowingContinuation({ config in
+            DispatchQueue.main.async { [self] in
+                var res = 0
+                if HKHealthStore.isHealthDataAvailable(){
+                    let startDay = realm.objects(StartDay.self).first?.startDay.formatTime() ?? .init()
+                    let current = Date()
+                    guard let step = HKSampleType.quantityType(forIdentifier: .stepCount) else { fatalError() }
+                    
+                    let predicate = HKQuery.predicateForSamples(withStart: startDay, end: current, options: .strictStartDate)
+                    
+                    let query = HKSampleQuery(
+                        sampleType: step,
+                        predicate: predicate,
+                        limit: .max,
+                        sortDescriptors: nil
+                    ) { _, data, err in
+                        if let err = err{
+                            print(err.localizedDescription)
+                            config.resume(throwing: err)
+                        }
+                        for sample: HKQuantitySample in (data as? [HKQuantitySample]) ?? [] {
+                            res += Int(sample.quantity.doubleValue(for: .count()))
+                        }
+                    }
+                    store.execute(query)
+                }
+                config.resume(returning: res)
+            }
+        })
+    }
+    
     func getAllStepWithDay() async throws -> [StepWithDay]{
         try await withCheckedThrowingContinuation({ config in
             DispatchQueue.main.async { [self] in
@@ -34,9 +66,9 @@ final class DefaultHealthRepository: HealthRepository{
                         let query = HKSampleQuery(
                             sampleType: step,
                             predicate: predicate,
-                            limit: 10,
+                            limit: .max,
                             sortDescriptors: nil
-                        ) { query, data, err in
+                        ) { _, data, err in
                             if let err = err{
                                 print(err.localizedDescription)
                                 config.resume(throwing: err)

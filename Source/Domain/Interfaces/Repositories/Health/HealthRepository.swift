@@ -7,5 +7,6 @@
 //
 
 protocol HealthRepository{
+    func getTotalStep() async throws -> Int
     func getAllStepWithDay() async throws -> [StepWithDay]
 }
