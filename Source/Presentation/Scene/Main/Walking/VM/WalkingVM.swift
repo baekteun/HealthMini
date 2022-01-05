@@ -11,15 +11,23 @@ import Foundation
 final class WalkingVM: baseViewModel{
     // MARK: - Properties
     private let getAllStepWithDayUseCase: GetAllStepWithDayUseCase
+    private let getTotalStepUseCase: GetTotalStepUseCase
+    
+    var totalStep = Observable(0)
+    var averageStep = Observable(0)
     
     // MARK: - Init
     override init(coordinator: baseCoordinator) {
         getAllStepWithDayUseCase = AppDI.shared.getDefaultGetAllStepWithDayUseCase()
+        getTotalStepUseCase = AppDI.shared.getDefaultGetTotalStepUseCase()
         super.init(coordinator: coordinator)
     }
     
     // MARK: - Method
     func viewDidLoad(){
-        getAllStepWithDayUseCase.execute()
+        Task{
+            self.totalStep.value = try await getTotalStepUseCase.execute()
+        }
+        
     }
 }

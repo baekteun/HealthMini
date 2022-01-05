@@ -49,6 +49,9 @@ extension AppDI{
     func getDefaultGetAllStepWithDayUseCase() -> DefaultGetAllStepWithDayUseCase{
         return .init(repository: getDefaultHealthRepository())
     }
+    func getDefaultGetTotalStepUseCase() -> DefaultGetTotalStepUseCase{
+        return .init(repo: getDefaultHealthRepository())
+    }
 }
 
 // MARK: - Repository

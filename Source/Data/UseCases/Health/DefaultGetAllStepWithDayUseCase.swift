@@ -12,10 +12,7 @@ final class DefaultGetAllStepWithDayUseCase: GetAllStepWithDayUseCase{
     init(repository: HealthRepository) {
         self.repo = repository
     }
-    func execute() {
-        Task{
-            try await repo.getAllStepWithDay()
-        }
-        
+    func execute() async throws -> [StepWithDay]{
+        return try await repo.getAllStepWithDay()
     }
 }
