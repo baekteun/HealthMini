@@ -59,10 +59,9 @@ final class DefaultHealthRepository: HealthRepository{
                 }
                 config.resume(returning: res)
             }
-        
+        })
     }
 }
-
 
 private extension DefaultHealthRepository{
     func reqAuthoHKit(){
