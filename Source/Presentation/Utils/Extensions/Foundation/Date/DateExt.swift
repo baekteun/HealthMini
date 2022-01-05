@@ -14,4 +14,15 @@ extension Date{
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: self)
     }
+    func betweenDay(date: Date) -> Int{
+        let res = Calendar.current.dateComponents([.day], from: self, to: date)
+        return (res.day ?? 0) + 1
+    }
+    func formatTime() -> Date{
+        var s = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self)
+        s.hour = 0
+        s.minute = 0
+        s.second = 0
+        return Calendar.current.date(from: s) ?? .init()
+    }
 }

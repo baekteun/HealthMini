@@ -36,12 +36,18 @@ extension AppDI{
         return .init(repository: getDefaultStartDayRepository())
     }
     
+    
     func getDefaultGetKcalUseCase() -> DefaultGetKcalUseCase{
         return .init(repository: getDefaultKcalRepository())
     }
     
     func getDefaultSetKcalUseCase() -> DefaultSetKcalUseCase{
         return .init(repository: getDefaultKcalRepository())
+    }
+    
+    
+    func getDefaultGetAllStepWithDayUseCase() -> DefaultGetAllStepWithDayUseCase{
+        return .init(repository: getDefaultHealthRepository())
     }
 }
 
@@ -52,6 +58,9 @@ extension AppDI{
     }
     
     func getDefaultKcalRepository() -> DefaultKcalRepository{
+        return .init()
+    }
+    func getDefaultHealthRepository() -> DefaultHealthRepository{
         return .init()
     }
 }

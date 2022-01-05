@@ -39,4 +39,7 @@ final class WalkingVC: baseVC<WalkingVM>{
     override func configureVC() {
         
     }
+    override func bindVM() {
+        viewModel.viewDidLoad()
+    }
 }
