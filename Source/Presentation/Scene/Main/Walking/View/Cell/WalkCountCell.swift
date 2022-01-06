@@ -10,6 +10,13 @@ import UIKit
 
 final class WalkCountCell: BaseTableViewCell<StepWithDay>{
     // MARK: - Properties
+    private let view: UIView = {
+        let v = UIView()
+        v.backgroundColor = .white
+        v.layer.cornerRadius = 20
+        return v
+    }()
+    
     private let stepLabel: UILabel = {
         let lb = UILabel()
         lb.font = UIFont(font: HealthMiniFontFamily.Roboto.bold, size: 18)
@@ -23,12 +30,22 @@ final class WalkCountCell: BaseTableViewCell<StepWithDay>{
         return lb
     }()
     
+    
+    override func layoutSubviews() {
+        
+    }
     // MARK: - UI
     override func addView() {
-        addSubViews(stepLabel, dateLabel)
+        contentView.addSubViews(view)
+        view.addSubViews(stepLabel, dateLabel)
     }
     override func setLayout() {
         NSLayoutConstraint.activate([
+            view.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            view.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            view.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            view.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            
             stepLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             stepLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             
@@ -37,11 +54,11 @@ final class WalkCountCell: BaseTableViewCell<StepWithDay>{
         ])
     }
     override func configureCell() {
-        self.layer.cornerRadius = 20
-        self.addShadow(color: .black, radius: 2, offSet: CGSize(width: 0, height: 1), opacity: 1)
+        view.addShadow(color: .lightGray, radius: 2, offSet: .init(width: 0, height: 2), opacity: 1)
     }
     
     override func bind(_ model: StepWithDay) {
-        
+        stepLabel.text = "\(model.stepCount)걸음"
+        dateLabel.text = "\(model.date.dateToString())"
     }
 }

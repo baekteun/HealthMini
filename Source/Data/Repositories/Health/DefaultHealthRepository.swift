@@ -84,11 +84,11 @@ final class DefaultHealthRepository: HealthRepository{
                     res.enumerateStatistics(from: startDay, to: endDay) { statics, stop in
                         
                         if let qu = statics.sumQuantity(){
-                            steps.append(.init(date: statics.endDate, stepCount: Int(qu.doubleValue(for: .count()))))
+                            steps.append(.init(date: statics.startDate, stepCount: Int(qu.doubleValue(for: .count()))))
                         }
                     }
                     
-                    completion((steps, nil))
+                    completion((steps.reversed(), nil))
                 }
             }
             self.store.execute(query)

@@ -12,6 +12,7 @@ extension Date{
     func dateToString() -> String{
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "ko_kr")
         return formatter.string(from: self)
     }
     func betweenDay(date: Date) -> Int{
