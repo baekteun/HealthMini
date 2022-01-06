@@ -27,9 +27,9 @@ final class DefaultHealthRepository: HealthRepository{
         self.getSleepTimeMethod(completion: completion)
     }
     
-    func getBurnedEnergy(completion: @escaping (([KcalWithDay]?, Error?)) -> Void) {
+    func getRecords(completion: @escaping (([Record]?, Error?)) -> Void) {
         reqRead()
-        self.getBurnedEnergyMethod(completion: completion)
+        self.getRecordsMethod(completion: completion)
     }
     
     func fetchRecord() {

@@ -55,5 +55,6 @@ extension DefaultHealthRepository{
                 }
             }
         }
+        self.store.execute(q)
     }
 }

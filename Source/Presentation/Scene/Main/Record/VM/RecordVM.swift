@@ -9,25 +9,18 @@
 final class RecordVM: baseViewModel{
     // MARK: - Properties
     
-    private let getBurnedEnergyUseCase: GetBurnedEnergyUseCase
+    
     
     var recordDatasources: [KcalWithDay] = []
     
     // MARK: - Init
     override init(coordinator: baseCoordinator) {
-        self.getBurnedEnergyUseCase = AppDI.shared.getDefaultGetBurnedEnergyUseCase()
+        
         super.init(coordinator: coordinator)
     }
     
     // MARK: - Method
     func viewDidAppear() {
-        getBurnedEnergyUseCase.execute { data, err in
-            if let err = err{
-                print(err.localizedDescription)
-                return
-            }
-            print("ASDF")
-            print(data)
-        }
+        
     }
 }
