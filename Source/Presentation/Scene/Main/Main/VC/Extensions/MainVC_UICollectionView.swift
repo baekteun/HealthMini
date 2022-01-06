@@ -2,7 +2,7 @@
 //  MainVC_UICollectionView.swift
 //  HealthMini
 //
-//  Created by 최형우 on 2022/01/04.
+//  Created by 최우 on 2022/01/04.
 //  Copyright © 2022 baegteun. All rights reserved.
 //
 
@@ -24,7 +24,7 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationItem.backBarButtonItem =
-            .init(g
+            .init(
                 title: viewModel.cellDidSelect(index: indexPath),
                 style: .plain,
                 target: self,

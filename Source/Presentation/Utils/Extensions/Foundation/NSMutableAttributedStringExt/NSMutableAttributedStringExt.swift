@@ -14,4 +14,11 @@ extension NSMutableAttributedString{
         let range: NSRange = self.mutableString.range(of: textToFind,options: .caseInsensitive)
         self.addAttribute(NSAttributedString.Key.font, value: font, range: range)
     }
+    func appendImage(_ image: UIImage){
+        let imageAttchment = NSTextAttachment()
+        imageAttchment.image = image
+        
+        let strImage = NSAttributedString(attachment: imageAttchment)
+        self.append(strImage)
+    }
 }
