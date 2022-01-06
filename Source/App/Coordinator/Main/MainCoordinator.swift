@@ -38,4 +38,7 @@ private extension MainCoordinator{
         let vc = AppDI.shared.getSleepVC(coordinator: self)
         self.navigationController.pushViewController(vc, animated: true)
     }
+    func navigateToRecord() {
+        
+    }
 }

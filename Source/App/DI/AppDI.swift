@@ -25,6 +25,11 @@ final class AppDI{
         return WalkingVC(viewModel: vm)
     }
     
+    func getRecordVC(coordinator: baseCoordinator) -> RecordVC{
+        let vm = RecordVM(coordinator: coordinator)
+        return RecordVC(viewModel: vm )
+    }
+    
     func getSleepVC(coordinator: baseCoordinator) -> SleepVC{
         let vm = SleepVM(coordinator: coordinator)
         return SleepVC(viewModel: vm)
