@@ -14,6 +14,7 @@ final class IsEnoughSleepLabel: UILabel{
         super.init(frame: frame)
         self.textAlignment = .center
         self.font = UIFont(font: HealthMiniFontFamily.Roboto.bold, size: 15)
+        self.layer.cornerRadius = 15
     }
     
     required init?(coder: NSCoder) {
