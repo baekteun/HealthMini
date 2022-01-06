@@ -30,10 +30,6 @@ final class WalkCountCell: BaseTableViewCell<StepWithDay>{
         return lb
     }()
     
-    
-    override func layoutSubviews() {
-        
-    }
     // MARK: - UI
     override func addView() {
         contentView.addSubViews(view)
