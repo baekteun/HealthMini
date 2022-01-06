@@ -65,6 +65,9 @@ extension AppDI{
     func getDefaultGetSleepTimeUseCase() -> DefaultGetSleepTimeUseCase{
         return .init(repo: getDefaultHealthRepository())
     }
+    func getDefaultGetBurnedEnergyUseCase() -> DefaultGetBurnedEnergyUseCase{
+        return .init(repo: getDefaultHealthRepository())
+    }
 }
 
 // MARK: - Repository
