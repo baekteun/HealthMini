@@ -32,6 +32,11 @@ final class DefaultHealthRepository: HealthRepository{
         self.getRecordsMethod(completion: completion)
     }
     
+    func getTodayExercies(completion: @escaping (([KcalWithDay]?, Error?)) -> Void) {
+        reqRead()
+        self.getTodayExerciesMethod(completion: completion)
+    }
+    
     func fetchRecord() {
         reqRead()
         self.fetchRecordMethod()
