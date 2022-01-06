@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 extension RecordVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -20,5 +21,15 @@ extension RecordVC: UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            let realm = try! Realm()
+            let obj = realm.object(ofType: Record.self, forPrimaryKey: viewModel.recordDatasources.value[indexPath.row].id) ?? .init()
+            try! realm.write{
+                realm.delete(obj)
+            }
+            viewModel.recordDatasources.value.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
 }
