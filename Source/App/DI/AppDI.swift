@@ -24,6 +24,11 @@ final class AppDI{
         let vm = WalkingVM(coordinator: coordinator)
         return WalkingVC(viewModel: vm)
     }
+    
+    func getSleepVC(coordinator: baseCoordinator) -> SleepVC{
+        let vm = SleepVM(coordinator: coordinator)
+        return SleepVC(viewModel: vm)
+    }
 }
 
 // MARK: - UseCase

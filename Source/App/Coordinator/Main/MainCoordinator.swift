@@ -32,4 +32,5 @@ private extension MainCoordinator{
         let vc = AppDI.shared.getWalkingVC(coordinator: self)
         self.navigationController.pushViewController(vc, animated: true)
     }
+    
 }
