@@ -21,6 +21,8 @@ final class MainCoordinator: baseCoordinator{
         switch step{
         case .walkingIsRequired:
             navigateToWalking()
+        case .recordIsRequired:
+            navigateToRecord()
         case .sleepIsRequired:
             navigateToSleep()
         default:
@@ -39,6 +41,7 @@ private extension MainCoordinator{
         self.navigationController.pushViewController(vc, animated: true)
     }
     func navigateToRecord() {
-        
+        let vc = AppDI.shared.getRecordVC(coordinator: self)
+        self.navigationController.pushViewController(vc, animated: true)
     }
 }
