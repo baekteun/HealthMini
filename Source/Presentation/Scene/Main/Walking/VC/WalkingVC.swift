@@ -43,7 +43,7 @@ final class WalkingVC: baseVC<WalkingVM>{
         NSLayoutConstraint.activate([
             stepCountView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stepCountView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stepCountView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            stepCountView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: bound.height*0.0015),
             stepCountView.heightAnchor.constraint(equalToConstant: bound.height*0.2068),
             
             stepTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -53,7 +53,7 @@ final class WalkingVC: baseVC<WalkingVM>{
         ])
     }
     override func configureVC() {
-        self.navigationController?.navigationBar.tintColor = .black
+        
     }
     private func setDelegate(){
         stepTableView.delegate = self

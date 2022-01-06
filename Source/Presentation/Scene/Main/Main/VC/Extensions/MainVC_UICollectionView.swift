@@ -22,8 +22,9 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.navigationController?.navigationBar.tintColor = .black
         self.navigationItem.backBarButtonItem =
-            .init(
+            .init(g
                 title: viewModel.cellDidSelect(index: indexPath),
                 style: .plain,
                 target: self,
