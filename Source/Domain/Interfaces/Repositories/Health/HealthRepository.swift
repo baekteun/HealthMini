@@ -10,4 +10,5 @@ protocol HealthRepository{
     func getAllStepWithDay(completion: @escaping(([StepWithDay]?, Error?)) -> Void)
     func getSleepTime(completion: @escaping((Int?, Error?)) -> Void)
     func getBurnedEnergy(completion: @escaping(([KcalWithDay]?, Error?)) -> Void)
+    func fetchRecord()
 }

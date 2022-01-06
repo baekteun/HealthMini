@@ -9,9 +9,9 @@
 import RealmSwift
 
 final class StartDay: Object{
-    @Persisted var startDay: Date = Date()
+    @Persisted var startDay: Date
     
-    convenience init(firstDay: Date) {
+    convenience init(firstDay: Date = Date()) {
         self.init()
         self.startDay = firstDay
     }

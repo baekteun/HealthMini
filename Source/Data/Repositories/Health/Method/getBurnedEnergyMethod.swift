@@ -21,6 +21,8 @@ extension DefaultHealthRepository{
             
             var anchorComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
             anchorComponents.hour = 0
+            anchorComponents.minute = 0
+            anchorComponents.second = 0
             let anchorDate = Calendar.current.date(from: anchorComponents) ?? .init()
             let query = HKStatisticsCollectionQuery(
                 quantityType: step,
@@ -28,12 +30,12 @@ extension DefaultHealthRepository{
                 options: .cumulativeSum,
                 anchorDate: anchorDate,
                 intervalComponents: dateComponents)
+            
             query.initialResultsHandler = { query, res, err in
                 if let err = err{
                     completion((nil, err))
                     return
                 }
-                
                 if let res = res{
                     var steps: [KcalWithDay] = []
                     res.enumerateStatistics(from: startDay, to: endDay) { statics, stop in
@@ -44,8 +46,11 @@ extension DefaultHealthRepository{
                     }
                     completion((steps, nil))
                 }
+                
+                
             }
-            completion(([],nil))
+            self.store.execute(query)
+//            completion(([],nil))
         }
     }
 }
