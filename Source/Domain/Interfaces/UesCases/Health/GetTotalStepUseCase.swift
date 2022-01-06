@@ -7,5 +7,5 @@
 //
 
 protocol GetTotalStepUseCase{
-    func execute() async throws -> Int
+    func execute(completion: @escaping((Int?, Error?)) -> Void)
 }

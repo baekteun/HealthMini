@@ -28,7 +28,7 @@ final class StepCountView: UIView{
     
     private let stack: UIStackView = {
         let s = UIStackView()
-        s.axis = .horizontal
+        s.axis = .vertical
         s.spacing = 10
         return s
     }()
@@ -47,8 +47,11 @@ final class StepCountView: UIView{
     
     // MARK: - Method
     func bind(total: Int, average: Int){
-        totalStepLabel.text = "총 \(total)걸음"
-        averageStepLabel.text = "평균 \(average)걸음"
+        DispatchQueue.main.async {
+            self.totalStepLabel.text = "총 \(total)걸음"
+            self.averageStepLabel.text = "평균 \(average)걸음"
+        }
+        
     }
 }
 

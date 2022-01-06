@@ -17,6 +17,11 @@ final class WalkingVC: baseVC<WalkingVM>{
     }()
     
     // MARK: - Lifecycle
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.viewDidLoad()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if self.isMovingFromParent {
@@ -40,6 +45,10 @@ final class WalkingVC: baseVC<WalkingVM>{
         
     }
     override func bindVM() {
-        viewModel.viewDidLoad()
+        viewModel.stepCount.bind { total, ave in
+            self.stepCountView.bind(total: total, average: ave)
+        }
+        
+        
     }
 }

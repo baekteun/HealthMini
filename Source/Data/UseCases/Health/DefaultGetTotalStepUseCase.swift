@@ -11,7 +11,7 @@ final class DefaultGetTotalStepUseCase: GetTotalStepUseCase{
     init(repo: HealthRepository){
         self.repo = repo
     }
-    func execute() async throws -> Int {
-        return try await repo.getTotalStep()
+    func execute(completion: @escaping ((Int?, Error?)) -> Void) {
+        repo.getTotalStep(completion: completion)
     }
 }

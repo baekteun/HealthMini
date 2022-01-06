@@ -1,4 +1,3 @@
-//
 //  HealthRepository.swift
 //  HealthMini
 //
@@ -7,6 +6,7 @@
 //
 
 protocol HealthRepository{
-    func getTotalStep() async throws -> Int
-    func getAllStepWithDay() async throws -> [StepWithDay]
+    func getTotalStep(completion: @escaping((Int?, Error?)) -> Void)
+    func getAllStepWithDay(completion: @escaping(([StepWithDay]?, Error?)) -> Void)
+    
 }

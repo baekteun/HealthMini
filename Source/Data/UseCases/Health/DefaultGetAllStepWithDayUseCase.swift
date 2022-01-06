@@ -12,7 +12,7 @@ final class DefaultGetAllStepWithDayUseCase: GetAllStepWithDayUseCase{
     init(repository: HealthRepository) {
         self.repo = repository
     }
-    func execute() async throws -> [StepWithDay]{
-        return try await repo.getAllStepWithDay()
+    func execute(completion: @escaping (([StepWithDay]?, Error?)) -> Void) {
+        repo.getAllStepWithDay(completion: completion)
     }
 }

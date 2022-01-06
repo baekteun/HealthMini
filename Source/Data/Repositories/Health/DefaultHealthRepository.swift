@@ -10,89 +10,92 @@ import HealthKit
 import RealmSwift
 
 final class DefaultHealthRepository: HealthRepository{
-    private let realm = try! Realm()
     private let store = HKHealthStore()
     
-    func getTotalStep() async throws -> Int {
-        try await withCheckedThrowingContinuation({ config in
-            DispatchQueue.main.async { [self] in
-                var res = 0
-                if HKHealthStore.isHealthDataAvailable(){
-                    let startDay = realm.objects(StartDay.self).first?.startDay.formatTime() ?? .init()
-                    let current = Date()
-                    guard let step = HKSampleType.quantityType(forIdentifier: .stepCount) else { fatalError() }
-                    
-                    let predicate = HKQuery.predicateForSamples(withStart: startDay, end: current, options: .strictStartDate)
-                    
-                    let query = HKSampleQuery(
-                        sampleType: step,
-                        predicate: predicate,
-                        limit: .max,
-                        sortDescriptors: nil
-                    ) { _, data, err in
-                        if let err = err{
-                            print(err.localizedDescription)
-                            config.resume(throwing: err)
-                        }
-                        for sample: HKQuantitySample in (data as? [HKQuantitySample]) ?? [] {
-                            res += Int(sample.quantity.doubleValue(for: .count()))
+    func getTotalStep(completion: @escaping ((Int?, Error?)) -> Void) {
+        let realm = try! Realm()
+        let startDay = realm.objects(StartDay.self).first?.startDay ?? .init()
+        let endDay = Date()
+        DispatchQueue.main.async {
+            guard let step = HKObjectType.quantityType(forIdentifier: .stepCount) else { return }
+            var dateComponents = DateComponents()
+            dateComponents.day = 1
+            
+            var anchorComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+            anchorComponents.hour = 0
+            let anchorDate = Calendar.current.date(from: anchorComponents) ?? .init()
+            let query = HKStatisticsCollectionQuery(
+                quantityType: step,
+                quantitySamplePredicate: nil,
+                options: .cumulativeSum,
+                anchorDate: anchorDate,
+                intervalComponents: dateComponents)
+            
+            query.initialResultsHandler = { query, res, err in
+                if let err = err{
+                    completion((nil, err))
+                    return
+                }
+                
+                if let res = res{
+                    var total = 0
+                    res.enumerateStatistics(from: startDay, to: endDay) { statics, stop in
+                        
+                        if let qu = statics.sumQuantity(){
+                            total += Int(qu.doubleValue(for: .count()))
                         }
                     }
-                    store.execute(query)
+                    print(total)
+                    completion((total, nil))
                 }
-                config.resume(returning: res)
             }
-        })
+            self.store.execute(query)
+        }
+        
     }
     
-    func getAllStepWithDay() async throws -> [StepWithDay]{
-        try await withCheckedThrowingContinuation({ config in
-            DispatchQueue.main.async { [self] in
-                var res: [StepWithDay] = []
-                if HKHealthStore.isHealthDataAvailable(){
-                    reqAuthoHKit()
-                    let startDay = realm.objects(StartDay.self).first?.startDay.formatTime() ?? .init()
-                    
-                    let current = Date()
-                    
-                    guard let step = HKSampleType.quantityType(forIdentifier: .stepCount) else { fatalError() }
-                    
-                    for i in 0..<startDay.betweenDay(date: current){
-                        let curDay = Calendar.current.date(byAdding: .day, value: i, to: startDay)
-                        let endDay = Calendar.current.date(byAdding: .day, value: i + 1, to: startDay)
-                        
-                        let predicate = HKQuery.predicateForSamples(withStart: curDay, end: endDay, options: .strictStartDate)
-                        
-                        let query = HKSampleQuery(
-                            sampleType: step,
-                            predicate: predicate,
-                            limit: .max,
-                            sortDescriptors: nil
-                        ) { _, data, err in
-                            if let err = err{
-                                print(err.localizedDescription)
-                                config.resume(throwing: err)
-                                return
-                            }
-                            
-                            var steps: Int = 0
-                            for sample: HKQuantitySample in (data as? [HKQuantitySample]) ?? [] {
-                                steps += Int(sample.quantity.doubleValue(for: .count()))
-                            }
-                            
-                            let day = data?.first?.endDate.formatTime() ?? .init()
-                            
-                            res.append(.init(date: day, stepCount: steps))
-                        }
-                        store.execute(query)
-                    }
-                }else{
-                    
+    func getAllStepWithDay(completion: @escaping (([StepWithDay]?, Error?)) -> Void) {
+        let realm = try! Realm()
+        let startDay = realm.objects(StartDay.self).first?.startDay ?? .init()
+        let endDay = Date()
+        DispatchQueue.main.async {
+            guard let step = HKObjectType.quantityType(forIdentifier: .stepCount) else { return }
+            var dateComponents = DateComponents()
+            dateComponents.day = 1
+            
+            var anchorComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+            anchorComponents.hour = 0
+            let anchorDate = Calendar.current.date(from: anchorComponents) ?? .init()
+            let query = HKStatisticsCollectionQuery(
+                quantityType: step,
+                quantitySamplePredicate: nil,
+                options: .cumulativeSum,
+                anchorDate: anchorDate,
+                intervalComponents: dateComponents)
+            
+            query.initialResultsHandler = { query, res, err in
+                if let err = err{
+                    completion((nil, err))
+                    return
                 }
-                config.resume(returning: res)
+                
+                if let res = res{
+                    var steps: [StepWithDay] = []
+                    res.enumerateStatistics(from: startDay, to: endDay) { statics, stop in
+                        
+                        if let qu = statics.sumQuantity(){
+                            steps.append(.init(date: statics.endDate, stepCount: Int(qu.doubleValue(for: .count()))))
+                        }
+                    }
+                    
+                    completion((steps, nil))
+                }
             }
-        })
+            self.store.execute(query)
+        }
     }
+    
+    
 }
 
 private extension DefaultHealthRepository{

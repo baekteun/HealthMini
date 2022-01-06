@@ -7,5 +7,5 @@
 //
 
 protocol GetAllStepWithDayUseCase{
-    func execute() async throws -> [StepWithDay]
+    func execute(completion: @escaping(([StepWithDay]?, Error?)) -> Void)
 }
