@@ -79,13 +79,4 @@ final class RecordCell: BaseTableViewCell<Record>{
         isCompleteLabel.text = model.isComplete ? "목표달성" : "목표미달성"
         
     }
-    
-    // MARK: - Method
-    func onEdit(){
-        print("A")
-        view.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50).isActive = true
-    }
-    func closeEdit(){
-        view.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-    }
 }

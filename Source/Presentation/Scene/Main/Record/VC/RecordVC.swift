@@ -41,7 +41,7 @@ final class RecordVC: baseVC<RecordVM>{
         ])
     }
     override func configureVC() {
-        self.navigationItem.rightBarButtonItem = .init(title: "Edit", style: .plain, target: self, action: #selector(editButonDidTap(_:)))
+        self.navigationItem.rightBarButtonItem = .init(image: UIImage(systemName: "minus.circle.fill")?.withTintColor(.red, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(editButonDidTap(_:)))
     }
     private func setDelegate(){
         tableView.delegate = self
@@ -56,6 +56,8 @@ final class RecordVC: baseVC<RecordVM>{
         }
         viewModel.isEditingMode.bind { [weak self] mode in
             self?.tableView.setEditing(mode, animated: true)
+            self?.navigationItem.rightBarButtonItem?.title = mode ? "Done" : "Edit"
+            self?.navigationItem.rightBarButtonItem?.image = mode ? nil : UIImage(systemName: "minus.circle.fill")?.withTintColor(.red, renderingMode: .alwaysOriginal)
         }
     }
 }
