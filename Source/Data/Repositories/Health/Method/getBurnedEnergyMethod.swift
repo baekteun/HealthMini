@@ -39,7 +39,7 @@ extension DefaultHealthRepository{
                     res.enumerateStatistics(from: startDay, to: endDay) { statics, stop in
                         
                         if let qu = statics.sumQuantity(){
-                            steps.append(.init(date: statics.startDate, sleepTime: Int(qu.doubleValue(for: .kilocalorie()))))
+                            steps.append(.init(date: statics.startDate, burnedKcal: Int(qu.doubleValue(for: .kilocalorie()))))
                         }
                     }
                     completion((steps, nil))

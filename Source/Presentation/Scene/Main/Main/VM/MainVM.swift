@@ -40,9 +40,8 @@ final class MainVM: baseViewModel{
         switch selected{
         case .WALKING:
             coordinator.navigate(to: .walkingIsRequired)
-            
         case .RECORD:
-            break
+            coordinator.navigate(to: .recordIsRequired)
         case .SLEEP:
             coordinator.navigate(to: .sleepIsRequired)
         }

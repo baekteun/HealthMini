@@ -42,11 +42,11 @@ final class WalkCountCell: BaseTableViewCell<StepWithDay>{
             view.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
             view.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-            stepLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            stepLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            stepLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            stepLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             
-            dateLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            dateLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20)
+            dateLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
     }
     override func configureCell() {

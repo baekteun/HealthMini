@@ -10,5 +10,5 @@ import Foundation
 
 struct KcalWithDay{
     let date: Date
-    let sleepTime: Int
+    let burnedKcal: Int
 }
