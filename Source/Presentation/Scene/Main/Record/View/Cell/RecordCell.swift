@@ -26,6 +26,7 @@ final class RecordCell: BaseTableViewCell<Record>{
     
     private let dateLabel: UILabel = {
         let v = UILabel()
+        v.textAlignment = .center
         v.font = UIFont(font: HealthMiniFontFamily.Roboto.bold, size: 12)
         return v
     }()
@@ -33,6 +34,7 @@ final class RecordCell: BaseTableViewCell<Record>{
     private let isCompleteLabel: UILabel = {
         let v = UILabel()
         v.textColor = .lightGray
+        v.textAlignment = .center
         v.font = UIFont(font: HealthMiniFontFamily.Roboto.bold, size: 10)
         return v
     }()
@@ -44,6 +46,7 @@ final class RecordCell: BaseTableViewCell<Record>{
         return stack
     }()
     
+    
     // MARK: - UI
     override func addView() {
         contentView.addSubViews(view)
@@ -52,10 +55,10 @@ final class RecordCell: BaseTableViewCell<Record>{
     }
     override func setLayout() {
         NSLayoutConstraint.activate([
-            view.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            view.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            view.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            view.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             kcalLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             kcalLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -74,5 +77,15 @@ final class RecordCell: BaseTableViewCell<Record>{
         kcalLabel.text = "\(model.kcal)kcal"
         dateLabel.text = "\(model.date.dateToString())"
         isCompleteLabel.text = model.isComplete ? "목표달성" : "목표미달성"
+        
+    }
+    
+    // MARK: - Method
+    func onEdit(){
+        print("A")
+        view.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50).isActive = true
+    }
+    func closeEdit(){
+        view.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
     }
 }

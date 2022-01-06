@@ -13,6 +13,8 @@ final class RecordVM: baseViewModel{
     
     var recordDatasources = Observable([Record]())
     
+    var isEditingMode = Observable(false)
+    
     // MARK: - Init
     override init(coordinator: baseCoordinator) {
         self.getRecordsUseCase = AppDI.shared.getDefaultGetRecordsUseCase()

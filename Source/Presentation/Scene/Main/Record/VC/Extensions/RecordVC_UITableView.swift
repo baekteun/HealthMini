@@ -16,6 +16,7 @@ extension RecordVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecordCell.reusableID, for: indexPath) as? RecordCell else { return .init() }
         cell.model = viewModel.recordDatasources.value[indexPath.row]
+        
         return cell
     }
     
