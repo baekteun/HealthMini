@@ -37,4 +37,13 @@ final class SleepVC: baseVC<SleepVM>{
     override func configureVC() {
         
     }
+    
+    override func bindVM() {
+        viewModel.sleepTime.bind { [weak self] time in
+            DispatchQueue.main.async {
+                self?.todaySleepView.bind(time: time)
+                self?.isEnoughSleepLabel.bind(time: time)
+            }
+        }
+    }
 }

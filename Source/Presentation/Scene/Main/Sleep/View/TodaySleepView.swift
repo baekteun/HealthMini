@@ -37,6 +37,12 @@ final class TodaySleepView: UIView{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Method
+    func bind(time: Int){
+        
+        self.sleepTimeLabel.text = "\(time)시간"
+    }
 }
 
 // MARK: - UI

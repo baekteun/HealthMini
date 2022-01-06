@@ -13,15 +13,33 @@ final class DefaultHealthRepository: HealthRepository{
     let store = HKHealthStore()
     
     func getTotalStep(completion: @escaping ((Int?, Error?)) -> Void) {
-        self.getTotalStepMethod(completion: completion)
+        if !HKHealthStore.isHealthDataAvailable(){
+            reqAuthoHKit()
+            self.getTotalStepMethod(completion: completion)
+        }else{
+            self.getTotalStepMethod(completion: completion)
+        }
+        
     }
     
     func getAllStepWithDay(completion: @escaping (([StepWithDay]?, Error?)) -> Void) {
-        self.getAllStepWithDayMethod(completion: completion)
+        if !HKHealthStore.isHealthDataAvailable(){
+            reqAuthoHKit()
+            self.getAllStepWithDayMethod(completion: completion)
+        }else{
+            self.getAllStepWithDayMethod(completion: completion)
+        }
+        
     }
     
     func getSleepTime(completion: @escaping ((Int?, Error?)) -> Void) {
-        self.getSleepTimeMethod(completion: completion)
+        if !HKHealthStore.isHealthDataAvailable(){
+            reqAuthoHKit()
+            self.getSleepTimeMethod(completion: completion)
+        }else{
+            self.getSleepTimeMethod(completion: completion)
+        }
+        
     }
 }
 
@@ -29,7 +47,7 @@ private extension DefaultHealthRepository{
     func reqAuthoHKit(){
         store.requestAuthorization(toShare: nil, read: [
             .workoutType(),
-            .categoryType(forIdentifier: .sleepAnalysis) ?? .workoutType()g,
+            .categoryType(forIdentifier: .sleepAnalysis) ?? .workoutType(),
             .quantityType(forIdentifier: .stepCount)!
         ]) { suc, err in
             if let err = err{

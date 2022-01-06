@@ -57,6 +57,9 @@ extension AppDI{
     func getDefaultGetTotalStepUseCase() -> DefaultGetTotalStepUseCase{
         return .init(repo: getDefaultHealthRepository())
     }
+    func getDefaultGetSleepTimeUseCase() -> DefaultGetSleepTimeUseCase{
+        return .init(repo: getDefaultHealthRepository())
+    }
 }
 
 // MARK: - Repository

@@ -13,8 +13,10 @@ final class IsEnoughSleepLabel: UILabel{
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.textAlignment = .center
+        self.textColor = .white
         self.font = UIFont(font: HealthMiniFontFamily.Roboto.bold, size: 15)
-        self.layer.cornerRadius = 15
+        self.layer.cornerRadius = 17
+        self.clipsToBounds = true
     }
     
     required init?(coder: NSCoder) {
