@@ -36,7 +36,6 @@ final class DefaultHealthRepository: HealthRepository{
         reqRead()
         self.getTodayExerciesMethod(completion: completion)
     }
-    
     func fetchRecord() {
         reqRead()
         self.fetchRecordMethod()

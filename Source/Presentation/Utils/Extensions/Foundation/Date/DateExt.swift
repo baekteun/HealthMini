@@ -15,6 +15,12 @@ extension Date{
         formatter.locale = Locale(identifier: "ko_kr")
         return formatter.string(from: self)
     }
+    func detailDateToString() -> String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh:MM"
+        formatter.locale = Locale(identifier: "ko_kr")
+        return formatter.string(from: self)
+    }
     func betweenDay(date: Date) -> Int{
         let res = Calendar.current.dateComponents([.day], from: self, to: date)
         return (res.day ?? 0) + 1

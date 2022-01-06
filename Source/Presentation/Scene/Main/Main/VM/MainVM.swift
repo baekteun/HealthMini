@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 enum HealthKind: String{
     case WALKING
@@ -18,13 +19,16 @@ final class MainVM: baseViewModel{
     // MARK: - Init
     override init(coordinator: baseCoordinator) {
         self.getStartDayUseCase = AppDI.shared.getDefaultGetStartDayUseCase()
+        self.getTodayExerciseUseCase = AppDI.shared.getDefaultGetTodayExerciseUseCase()
         super.init(coordinator: coordinator)
     }
     
     // MARK: - Properties
     private let getStartDayUseCase: GetStartDayUseCase
+    private let getTodayExerciseUseCase: GetTodayExerciseUseCase
     var dataSource = Observable([HealthKind]())
-    var goalCount = Observable((Date(), 0))
+    var totalGaol = Observable((Date(), 0))
+    var chartData = Observable([KcalWithDay]())
     
     // MARK: - Method
     func setDatasource(data: [HealthKind]) {
@@ -32,7 +36,20 @@ final class MainVM: baseViewModel{
     }
     
     func viewDidAppear() {
-        self.goalCount.value.0 = getStartDayUseCase.execute()
+        let realm = try! Realm()
+        let goal = realm.objects(Kcal.self).first?.kcal ?? 0
+        self.totalGaol.value.0 = getStartDayUseCase.execute()
+        
+        self.getTodayExerciseUseCase.execute { exer, err in
+            if let err = err{
+                print(err.localizedDescription)
+                return
+            }
+            self.chartData.value = exer ?? []
+            self.totalGaol.value.1 = exer?.filter{ $0.burnedKcal >= goal }.count ?? 0
+        }
+        
+        
     }
     
     func cellDidSelect(index: IndexPath) -> String{

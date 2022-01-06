@@ -18,6 +18,9 @@ final class MainVC: baseVC<MainVM>{
         chart.clipsToBounds = true
         chart.noDataText = "아직 데이터가 없습니다!"
         chart.noDataTextColor = .white
+        chart.xAxis.labelPosition = .bottom
+        chart.tintColor = .white
+        chart.doubleTapToZoomEnabled = false
         chart.noDataFont = UIFont(font: HealthMiniFontFamily.Roboto.bold, size: 24) ?? .init()
         return chart
     }()
@@ -93,10 +96,20 @@ final class MainVC: baseVC<MainVM>{
     // MARK: - bind
     override func bindVM() {
         viewModel.dataSource.bind { [weak self] _ in
-            self?.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
         }
-        viewModel.goalCount.bind { date, count in
-            self.goalCountLabel.text = "\(date.dateToString())~오늘까지\n목표 달성 총 \(count)회"
+        viewModel.totalGaol.bind { [weak self] date, count in
+            DispatchQueue.main.async {
+                self?.goalCountLabel.text = "\(date.dateToString())~오늘까지\n목표 달성 총 \(count)회"
+            }
+        }
+        viewModel.chartData.bind { [weak self] data in
+            DispatchQueue.main.async {
+                self?.chart.data =  self?.setCharts(data: data)
+                self?.chart.xAxis.valueFormatter = IndexAxisValueFormatter(values: data.map(\.date).map{$0.detailDateToString()})
+            }
         }
     }
 }
