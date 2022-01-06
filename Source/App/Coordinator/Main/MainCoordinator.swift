@@ -22,7 +22,7 @@ final class MainCoordinator: baseCoordinator{
         case .walkingIsRequired:
             navigateToWalking()
         case .sleepIsRequired:
-            navigateToSleep()g
+            navigateToSleep()
         default:
             return
         }
