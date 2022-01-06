@@ -21,6 +21,8 @@ final class MainCoordinator: baseCoordinator{
         switch step{
         case .walkingIsRequired:
             navigateToWalking()
+        case .sleepIsRequired:
+            navigateToSleep()g
         default:
             return
         }
@@ -32,5 +34,8 @@ private extension MainCoordinator{
         let vc = AppDI.shared.getWalkingVC(coordinator: self)
         self.navigationController.pushViewController(vc, animated: true)
     }
-    
+    func navigateToSleep() {
+        let vc = AppDI.shared.getSleepVC(coordinator: self)
+        self.navigationController.pushViewController(vc, animated: true)
+    }
 }
