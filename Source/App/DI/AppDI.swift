@@ -68,6 +68,9 @@ extension AppDI{
     func getDefaultGetRecordsUseCase() -> DefaultGetRecordsUseCase{
         return .init(repo: getDefaultHealthRepository())
     }
+    func getDefaultGetTodayExerciseUseCase() -> DefaultGetTodayExerciseUseCase{
+        return .init(repo: getDefaultHealthRepository())
+    }
 }
 
 // MARK: - Repository
