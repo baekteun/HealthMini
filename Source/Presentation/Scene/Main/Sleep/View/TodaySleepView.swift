@@ -37,12 +37,9 @@ final class TodaySleepView: UIView{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - UI
-    
-    
 }
 
+// MARK: - UI
 private extension TodaySleepView{
     func addView(){
         addSubViews(todaySleepLabel, sleepTimeLabel)
