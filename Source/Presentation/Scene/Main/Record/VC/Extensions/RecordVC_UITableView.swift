@@ -10,11 +10,13 @@ import UIKit
 
 extension RecordVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return viewModel.recordDatasources.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return .init()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RecordCell.reusableID, for: indexPath) as? RecordCell else { return .init() }
+        cell.model = viewModel.recordDatasources.value[indexPath.row]
+        return cell
     }
     
     

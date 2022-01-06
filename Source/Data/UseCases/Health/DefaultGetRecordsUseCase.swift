@@ -9,8 +9,8 @@
 final class DefaultGetRecordsUseCase: GetRecordsUseCase{
     let resp: HealthRepository
     
-    init(resp: HealthRepository) {
-        self.resp = resp
+    init(repo: HealthRepository) {
+        self.resp = repo
     }
     
     func execute(completion: @escaping (([Record]?, Error?)) -> Void) {

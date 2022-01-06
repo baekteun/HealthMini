@@ -50,6 +50,7 @@ final class WalkCountCell: BaseTableViewCell<StepWithDay>{
         ])
     }
     override func configureCell() {
+        selectionStyle = .none
         view.addShadow(color: .lightGray, radius: 2, offSet: .init(width: 0, height: 2), opacity: 1)
     }
     

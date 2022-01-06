@@ -8,7 +8,8 @@
 
 import UIKit
 
-final class RecordCell: BaseTableViewCell<KcalWithDay>{
+
+final class RecordCell: BaseTableViewCell<Record>{
     // MARK: - Properties
     private let view: UIView = {
         let v = UIView()
@@ -29,7 +30,7 @@ final class RecordCell: BaseTableViewCell<KcalWithDay>{
         return v
     }()
     
-    private let isGoadLabel: UILabel = {
+    private let isCompleteLabel: UILabel = {
         let v = UILabel()
         v.textColor = .lightGray
         v.font = UIFont(font: HealthMiniFontFamily.Roboto.bold, size: 10)
@@ -46,7 +47,7 @@ final class RecordCell: BaseTableViewCell<KcalWithDay>{
     // MARK: - UI
     override func addView() {
         contentView.addSubViews(view)
-        leftStack.addArrangeSubviews([dateLabel, isGoadLabel])
+        leftStack.addArrangeSubviews([dateLabel, isCompleteLabel])
         view.addSubViews(kcalLabel, leftStack)
     }
     override func setLayout() {
@@ -59,16 +60,19 @@ final class RecordCell: BaseTableViewCell<KcalWithDay>{
             kcalLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             kcalLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
-            leftStack.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            leftStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             leftStack.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
     }
     override func configureCell() {
-        
+        self.selectionStyle = .none
+        view.addShadow(color: .lightGray, radius: 2, offSet: .init(width: 0, height: 2), opacity: 1)
     }
     
-    override func bind(_ model: KcalWithDay) {
-        
+    override func bind(_ model: Record) {
+        kcalLabel.text = "\(model.kcal)kcal"
+        dateLabel.text = "\(model.date.dateToString())"
+        isCompleteLabel.text = model.isComplete ? "목표달성" : "목표미달성"
     }
 }
