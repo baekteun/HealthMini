@@ -15,6 +15,7 @@ extension DefaultHealthRepository{
         let current = Date()
         print(formattedToday, current)
         let predicate = HKQuery.predicateForSamples(withStart: formattedToday, end: current, options: .strictStartDate)
+        
         guard let sleep = HKSampleType.categoryType(forIdentifier: .sleepAnalysis) else { return }
         let query = HKSampleQuery(
             sampleType: sleep,
