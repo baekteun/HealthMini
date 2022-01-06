@@ -30,12 +30,7 @@ final class WalkingVC: baseVC<WalkingVM>{
         viewModel.viewDidLoad()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if self.isMovingFromParent {
-            viewModel.coordinator.didFinish(coordinator: self.viewModel.coordinator)
-        }
-    }
+    
     
     // MARK: - UI
     override func setUp() {

@@ -33,8 +33,10 @@ class baseVC<T: baseViewModel>: UIViewController{
         bindVM()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
+    @available(*, unavailable)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewModel.coordinator.didFinish(coordinator: viewModel.coordinator)
     }
     
     deinit{

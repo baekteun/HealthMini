@@ -44,7 +44,7 @@ final class MainVM: baseViewModel{
         case .RECORD:
             break
         case .SLEEP:
-            break
+            coordinator.navigate(to: .sleepIsRequired)
         }
         return selected.rawValue
     }
