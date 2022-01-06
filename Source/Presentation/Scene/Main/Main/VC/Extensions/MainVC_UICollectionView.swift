@@ -22,7 +22,7 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.cellDidSelect(index: indexPath)
+        self.navigationItem.backBarButtonItem = .init(title: viewModel.cellDidSelect(index: indexPath), style: .plain, target: self, action: nil)
     }
 }
 

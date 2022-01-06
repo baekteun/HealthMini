@@ -35,16 +35,17 @@ final class MainVM: baseViewModel{
         self.goalCount.value.0 = getStartDayUseCase.execute()
     }
     
-    func cellDidSelect(index: IndexPath){
+    func cellDidSelect(index: IndexPath) -> String{
         let selected = self.dataSource.value[index.row]
         switch selected{
         case .WALKING:
             coordinator.navigate(to: .walkingIsRequired)
+            
         case .RECORD:
-            return
+            break
         case .SLEEP:
-            return
+            break
         }
-        
+        return selected.rawValue
     }
 }

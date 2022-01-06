@@ -58,7 +58,7 @@ final class WalkingVC: baseVC<WalkingVM>{
         ])
     }
     override func configureVC() {
-        
+        self.navigationController?.navigationBar.tintColor = .black
     }
     private func setDelegate(){
         stepTableView.delegate = self
